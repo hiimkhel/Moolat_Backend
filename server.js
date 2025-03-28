@@ -11,7 +11,7 @@ app.use("/api/auth", require("./src/routes/authRoutes"));
 
 app.use("/api/child", require("./src/routes/childRoutes"));
 app.use("/api/activity", require("./src/routes/actvitiesRoutes.js"));
-app.use("/api/test", require)
+app.use("/api/test", require("./src/routes/testRoutes.js"));
 
 
 app.listen(PORT, () => {

@@ -9,7 +9,7 @@ const registerChild = async(req, res) =>{
             name,
             age,
             gradeLevel,
-            progress:{videosCompleted: 0, quizTaken: 0, points: 0},
+            progress:{testCompleted: 0, exercisesCompleted: [], points: 0},
         })
         res.status(201).json({message: "Child registered successfully", childId: childRef.id});
     }catch(err){
