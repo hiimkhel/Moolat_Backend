@@ -1,0 +1,59 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpxix7wl7vbnm"]
+
+[ext_resource type="PackedScene" uid="uid://dq21r5ehi5m65" path="res://scenes/drag_and_drop/droppable.tscn" id="1_rqndd"]
+[ext_resource type="PackedScene" uid="uid://dxwi78tpx8hap" path="res://scenes/drag_and_drop/object.tscn" id="2_tobug"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HFlowContainer" type="HFlowContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HFlowContainer"]
+layout_mode = 2
+text = "The"
+
+[node name="Droppable" parent="MarginContainer/VBoxContainer/HFlowContainer" instance=ExtResource("1_rqndd")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Quick" type="Label" parent="MarginContainer/VBoxContainer/HFlowContainer"]
+layout_mode = 2
+text = "The"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 250
+
+[node name="HFlowContainer2" type="HFlowContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Droppable" parent="MarginContainer/VBoxContainer/HFlowContainer2" instance=ExtResource("1_rqndd")]
+layout_mode = 2
+
+[node name="object" parent="MarginContainer/VBoxContainer/HFlowContainer2" instance=ExtResource("2_tobug")]
+position = Vector2(162, 0)
+metadata/_edit_group_ = true

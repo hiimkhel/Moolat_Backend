@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3h3wdkd6eueg"]
+
+[ext_resource type="PackedScene" uid="uid://dxwi78tpx8hap" path="res://scenes/drag_and_drop/object.tscn" id="1_nu6tl"]
+[ext_resource type="PackedScene" uid="uid://dq21r5ehi5m65" path="res://scenes/drag_and_drop/droppable.tscn" id="1_vl6yk"]
+
+[node name="Drag and drop smooth" type="Node2D"]
+
+[node name="Droppable" parent="." instance=ExtResource("1_vl6yk")]
+
+[node name="Droppable2" parent="." instance=ExtResource("1_vl6yk")]
+offset_top = 160.0
+offset_right = 0.0
+offset_bottom = 160.0
+
+[node name="Droppable3" parent="." instance=ExtResource("1_vl6yk")]
+offset_left = 200.0
+offset_right = 200.0
+offset_bottom = 0.0
+
+[node name="object2" parent="." instance=ExtResource("1_nu6tl")]
+position = Vector2(104, 520)

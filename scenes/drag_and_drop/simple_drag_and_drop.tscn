@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgxyuco2817qx"]
+
+[ext_resource type="PackedScene" uid="uid://dxwi78tpx8hap" path="res://scenes/drag_and_drop/object.tscn" id="1_fj7qr"]
+[ext_resource type="PackedScene" uid="uid://vsfvvav5y7sj" path="res://scenes/drag_and_drop/platform.tscn" id="2_nk0ax"]
+
+[node name="SimpleDragAndDrop" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="platform" parent="." instance=ExtResource("2_nk0ax")]
+position = Vector2(24, 224)
+
+[node name="platform2" parent="." instance=ExtResource("2_nk0ax")]
+position = Vector2(168, 224)
+
+[node name="object" parent="." instance=ExtResource("1_fj7qr")]
+position = Vector2(16, 480)
+
+[node name="object2" parent="." instance=ExtResource("1_fj7qr")]
+position = Vector2(224, 408)
+
+[node name="object3" parent="." instance=ExtResource("1_fj7qr")]
+position = Vector2(32, 32)

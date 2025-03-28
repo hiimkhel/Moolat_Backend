@@ -14,20 +14,21 @@ var content_list = [
 	{"type": "video", "path": "res://assets/videos/test1.ogg"},
 	{"type": "game",  "color": Color(1, 0, 0)},
 	{"type": "video", "path": "res://assets/videos/test2.ogg"},
-	{"type": "video", "path": "res://assets/videos/test2.ogg"},
+	{"type": "game",  "color": Color(0, 1, 0)},
+	{"type": "video", "path": "res://assets/videos/test3.ogg"},
+	{"type": "game",  "color": Color(0, 1, 0)},
+	{"type": "video", "path": "res://assets/videos/test3.ogg"},
 	{"type": "game",  "color": Color(0, 1, 0)},
 	{"type": "video", "path": "res://assets/videos/test2.ogg"},
 	{"type": "game",  "color": Color(0, 1, 0)},
-	{"type": "video", "path": "res://assets/videos/test2.ogg"},
+	{"type": "video", "path": "res://assets/videos/test1.ogg"},
+	{"type": "game",  "color": Color(0, 1, 0)},
+	{"type": "video", "path": "res://assets/videos/test1.ogg"},
 	{"type": "game",  "color": Color(0, 1, 0)},
 	{"type": "video", "path": "res://assets/videos/test2.ogg"},
 	{"type": "game",  "color": Color(0, 1, 0)},
-	{"type": "video", "path": "res://assets/videos/test2.ogg"},
-	{"type": "game",  "color": Color(0, 1, 0)},
-	{"type": "video", "path": "res://assets/videos/test2.ogg"},
-	{"type": "game",  "color": Color(0, 1, 0)},
-	{"type": "game",  "color": Color(0, 0, 1)},
-	{"type": "video", "path": "res://assets/videos/test3.ogg"}
+	{"type": "video", "path": "res://assets/videos/test3.ogg"},
+	{"type": "game",  "color": Color(0, 0, 1)}
 ]
 
 var tween: Tween = null
