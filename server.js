@@ -12,7 +12,8 @@ app.use("/api/auth", require("./src/routes/authRoutes"));
 app.use("/api/child", require("./src/routes/childRoutes"));
 app.use("/api/activity", require("./src/routes/actvitiesRoutes.js"));
 app.use("/api/test", require("./src/routes/testRoutes.js"));
-
+app.use("/api/power-ups", require("./src/routes/powerUpRoutes.js"));
+app.use("/api/leaderboards", require("./src/routes/leaderBoardRoutes.js"))
 
 app.listen(PORT, () => {
   console.log(`Port is running on port ${PORT}`);
