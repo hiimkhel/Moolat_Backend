@@ -9,11 +9,25 @@ extends Control
 var backgrounds: Array = []
 var background_speed: float = 0.5  # Parallax multiplier for background movement
 
-# Array of available video paths for generating new video posts.
-var available_video_paths = [
-	"res://assets/videos/test1.ogg",
-	"res://assets/videos/test2.ogg",
-	"res://assets/videos/test3.ogg"
+# Hard-coded content list (order is fixed)
+var content_list = [
+	{"type": "video", "path": "res://assets/videos/test1.ogg"},
+	{"type": "game",  "color": Color(1, 0, 0)},
+	{"type": "video", "path": "res://assets/videos/test2.ogg"},
+	{"type": "video", "path": "res://assets/videos/test2.ogg"},
+	{"type": "game",  "color": Color(0, 1, 0)},
+	{"type": "video", "path": "res://assets/videos/test2.ogg"},
+	{"type": "game",  "color": Color(0, 1, 0)},
+	{"type": "video", "path": "res://assets/videos/test2.ogg"},
+	{"type": "game",  "color": Color(0, 1, 0)},
+	{"type": "video", "path": "res://assets/videos/test2.ogg"},
+	{"type": "game",  "color": Color(0, 1, 0)},
+	{"type": "video", "path": "res://assets/videos/test2.ogg"},
+	{"type": "game",  "color": Color(0, 1, 0)},
+	{"type": "video", "path": "res://assets/videos/test2.ogg"},
+	{"type": "game",  "color": Color(0, 1, 0)},
+	{"type": "game",  "color": Color(0, 0, 1)},
+	{"type": "video", "path": "res://assets/videos/test3.ogg"}
 ]
 
 var tween: Tween = null
@@ -23,11 +37,11 @@ var touch_end_pos: float = 0.0
 var touch_threshold: float = 50.0
 var touch_start_scroll: float = 0.0   # Record scroll position at touch start
 
-# Number of posts to initially generate in our pool.
-var pool_size: int = 10
-# Configuration for feed recycling:
-var max_posts: int = 15
-var recycle_count: int = 5  # How many posts to remove/add at once
+# Pool size and recycling configuration
+var pool_size: int = content_list.size()  # Initially generate all in fixed order
+var max_posts: int = content_list.size()    # For a fixed order feed, you might keep them all
+# If you want to recycle once there are too many, adjust max_posts and recycle_count accordingly.
+var recycle_count: int = 5
 
 func _ready():
 	scroll_container.custom_minimum_size = get_viewport_rect().size
@@ -36,8 +50,18 @@ func _ready():
 	for bg in backgrounds:
 		bg.custom_minimum_size = get_viewport_rect().size
 
-	# Generate an initial pool of content nodes.
-	generate_initial_pool(pool_size)
+	# Instantiate content nodes in fixed order.
+	for item in content_list:
+		var instance
+		if item.type == "video":
+			instance = load("res://scenes/video/VideoPost.tscn").instantiate()
+			# Defer setting the video path so the node is fully initialized.
+			instance.call_deferred("set_video_path", item.path)
+		elif item.type == "game":
+			instance = load("res://scenes/colorrect/color_rect.tscn").instantiate()
+			instance.call_deferred("set_custom_color", item.color)
+		instance.custom_minimum_size = scroll_container.custom_minimum_size
+		container.add_child(instance)
 	
 	await get_tree().process_frame
 	await get_tree().process_frame
@@ -46,28 +70,15 @@ func _ready():
 		post_height = container.get_child(0).size.y
 	scroll_container.set_v_scroll(0.0)
 	
-	# Increase delay to 0.3 seconds (or more) to allow deferred calls to run.
+	# Delay initial lazy loading to ensure deferred calls have run.
 	await get_tree().create_timer(0.3).timeout
 	check_contents_visibility()
-
-func generate_initial_pool(count: int) -> void:
-	# Generate a fixed number of nodes. For each node, randomly choose video or game.
-	for i in range(count):
-		var instance
-		if randf() < 0.5:
-			instance = load("res://scenes/video/VideoPost.tscn").instantiate()
-			# Defer setting the video path.
-			instance.call_deferred("set_video_path", available_video_paths[randi() % available_video_paths.size()])
-		else:
-			instance = load("res://scenes/colorrect/color_rect.tscn").instantiate()
-			instance.call_deferred("set_custom_color", Color(randf(), randf(), randf()))
-		instance.custom_minimum_size = scroll_container.custom_minimum_size
-		container.add_child(instance)
 
 func _process(delta: float) -> void:
 	_update_background_positions()
 	check_contents_visibility()
-	update_feed_window()
+	# Optionally call update_feed_window() if you want to recycle nodes after a threshold.
+	# update_feed_window()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch and event.pressed:
@@ -131,34 +142,3 @@ func _update_background_positions() -> void:
 	backgrounds[0].position.y = offset - vp_height  # One above the viewport
 	backgrounds[1].position.y = offset               # Centered in the viewport
 	backgrounds[2].position.y = offset + vp_height     # One below the viewport
-
-# Recycles posts when there are too many: removes posts that have scrolled far above and appends new posts at the bottom.
-func update_feed_window() -> void:
-	if container.get_child_count() > max_posts:
-		var removed_height: float = 0.0
-		var buffer = post_height * 0.5
-		var count = recycle_count
-		while count > 0 and container.get_child_count() > 0:
-			var node = container.get_child(0)
-			if node.position.y + node.size.y < scroll_container.get_v_scroll() - buffer:
-				removed_height += node.size.y + container.get_theme_constant("separation")
-				container.remove_child(node)
-				node.queue_free()
-				count -= 1
-			else:
-				break
-		if removed_height > 0:
-			scroll_container.set_v_scroll(scroll_container.get_v_scroll() - removed_height)
-			for i in range(recycle_count):
-				var instance
-				if randf() < 0.5:
-					instance = load("res://scenes/video/VideoPost.tscn").instantiate()
-					var path = available_video_paths[randi() % available_video_paths.size()]
-					instance.call_deferred("set_video_path", path)
-				else:
-					instance = load("res://scenes/colorrect/color_rect.tscn").instantiate()
-					instance.call_deferred("set_custom_color", Color(randf(), randf(), randf()))
-				instance.custom_minimum_size = scroll_container.custom_minimum_size
-				var last = container.get_child(container.get_child_count() - 1)
-				instance.position.y = last.position.y + last.size.y + container.get_theme_constant("separation")
-				container.add_child(instance)
