@@ -2,15 +2,19 @@ extends Control
 
 @onready var scroll_container: ScrollContainer = $ScrollContainer
 @onready var container: VBoxContainer = $ScrollContainer/VBoxContainer
+@onready var prompt: TextureRect = $Prompt
 @onready var background1: TextureRect = $Background1
 @onready var background2: TextureRect = $Background2
 @onready var background3: TextureRect = $Background3
+@onready var background4: TextureRect = $Background4
+
 
 var backgrounds: Array = []
 var background_speed: float = 0.5  # Parallax multiplier for background movement
 
 # Hard-coded content list (order is fixed)
 var content_list = [
+	{"type": "blank"},
 	{"type": "video", "path": "res://assets/videos/test1.ogg"},
 	{"type": "game",  "color": Color(1, 0, 0)},
 	{"type": "video", "path": "res://assets/videos/test2.ogg"},
@@ -54,15 +58,18 @@ func _ready():
 	# Instantiate content nodes in fixed order.
 	for item in content_list:
 		var instance
-		if item.type == "video":
+		if item.type == "blank":
+			# Create a blank post – an empty Control node.
+			instance = Control.new()
+		elif item.type == "video":
 			instance = load("res://scenes/video/VideoPost.tscn").instantiate()
-			# Defer setting the video path so the node is fully initialized.
 			instance.call_deferred("set_video_path", item.path)
 		elif item.type == "game":
 			instance = load("res://scenes/colorrect/color_rect.tscn").instantiate()
 			instance.call_deferred("set_custom_color", item.color)
 		instance.custom_minimum_size = scroll_container.custom_minimum_size
 		container.add_child(instance)
+
 	
 	await get_tree().process_frame
 	await get_tree().process_frame
@@ -136,10 +143,21 @@ func check_contents_visibility() -> void:
 
 func _update_background_positions() -> void:
 	var vp_height = get_viewport_rect().size.y
-	var total_offset = -scroll_container.get_v_scroll() * background_speed
-	var offset = fmod(total_offset, vp_height)
-	if offset < 0:
-		offset += vp_height
-	backgrounds[0].position.y = offset - vp_height  # One above the viewport
-	backgrounds[1].position.y = offset               # Centered in the viewport
-	backgrounds[2].position.y = offset + vp_height     # One below the viewport
+	var num_bg = 4  # Change this to the number of background nodes you have (e.g., 4)
+	var total_height = num_bg * vp_height
+
+	# Get the current vertical scroll value.
+	var S = scroll_container.get_v_scroll()
+	# Calculate offset so that backgrounds cycle.
+	# We want the backgrounds to move upward as S increases, so we take a negative modulus.
+	var offset = -fmod(S, total_height)
+	# Ensure offset is negative (or zero) for a consistent starting point.
+	if offset > 0:
+		offset -= total_height
+
+	# For each background, position it at: offset + (its index * vp_height).
+	# This will place them one after another vertically.
+	background1.position.y = offset + 0 * vp_height
+	background2.position.y = offset + 1 * vp_height
+	background3.position.y = offset + 2 * vp_height
+	background4.position.y = offset + 3 * vp_height

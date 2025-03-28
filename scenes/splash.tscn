@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://cc1idgtpqg4i"]
 
-[ext_resource type="Script" uid="uid://cfqnnf1ia23ms" path="res://node_2d.gd" id="1_10vqf"]
+[ext_resource type="Script" uid="uid://cfqnnf1ia23ms" path="res://scripts/splash.gd" id="1_10vqf"]
 [ext_resource type="PackedScene" uid="uid://c5yvmj26xgaw1" path="res://scenes/drag_and_drop/drag_and_drop_labels.tscn" id="2_d1bx2"]
 [ext_resource type="Texture2D" uid="uid://bkrbdfi7djm2x" path="res://assets/images/splash/logo.png" id="3_4rrho"]
 [ext_resource type="Texture2D" uid="uid://crd73d0lmet7x" path="res://assets/images/splash/bottom-gray-circle.png" id="4_d1bx2"]

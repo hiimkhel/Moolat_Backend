@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://ba2dv87aqn054"]
+[gd_scene load_steps=7 format=3 uid="uid://ba2dv87aqn054"]
 
 [ext_resource type="Script" uid="uid://crk6k7vwxou1l" path="res://scripts/main.gd" id="1_hyk8p"]
-[ext_resource type="Texture2D" uid="uid://bthi3iig0dd3b" path="res://assets/images/backgroundplaceholder.png" id="2_iuonh"]
+[ext_resource type="Texture2D" uid="uid://dns7de66yay5w" path="res://assets/images/main/screen-1.png" id="2_l3cfh"]
+[ext_resource type="Texture2D" uid="uid://c11nbl4s8sljb" path="res://assets/images/main/screen-2.png" id="3_6q06x"]
+[ext_resource type="Texture2D" uid="uid://kiqgemisuuxv" path="res://assets/images/main/screen-3.png" id="4_ow5a4"]
+[ext_resource type="Texture2D" uid="uid://dditiqnu2nadq" path="res://assets/images/main/screen-4.png" id="5_6q06x"]
+[ext_resource type="Texture2D" uid="uid://bjytimuf8remo" path="res://assets/images/main/screen-5.png" id="6_ow5a4"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -17,12 +21,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -26.0
-offset_right = 26.0
-offset_bottom = 1194.0
+offset_right = 4.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_iuonh")
+texture = ExtResource("3_6q06x")
 stretch_mode = 1
 
 [node name="Background2" type="TextureRect" parent="."]
@@ -30,12 +32,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -26.0
-offset_right = 26.0
-offset_bottom = 1194.0
+offset_right = 4.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_iuonh")
+texture = ExtResource("4_ow5a4")
 stretch_mode = 1
 
 [node name="Background3" type="TextureRect" parent="."]
@@ -43,12 +43,21 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -26.0
-offset_right = 26.0
-offset_bottom = 1194.0
+offset_right = 4.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_iuonh")
+texture = ExtResource("5_6q06x")
+stretch_mode = 1
+
+[node name="Background4" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_ow5a4")
 stretch_mode = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
@@ -66,3 +75,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 1
+
+[node name="Prompt" type="TextureRect" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_l3cfh")
+stretch_mode = 1

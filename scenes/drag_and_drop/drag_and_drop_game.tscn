@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cmdr7d32xtkxu" path="res://assets/icon.svg" id="1_wjq73"]
 [ext_resource type="Script" uid="uid://3mrthyyv4avd" path="res://scripts/drag_and_drop.gd" id="2_mg30w"]
 
-[node name="Control" type="Control"]
+[node name="DragAndDrop" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
