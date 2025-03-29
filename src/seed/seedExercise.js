@@ -2,53 +2,69 @@ const { db } = require("../firebaseConfig");
 
 const exercises = [
   {
-    type: "quiz",
-    question: "Which word is a noun?",
-    options: ["Jump", "Dog", "Quickly", "Soft"],
-    correctAnswer: "Dog", // Simple word identification
-    points: 10,
-  },
-  {
-    type: "quiz",
-    question: "What sound does 'C' make in 'Cat'?",
-    options: ["S", "K", "M", "T"],
-    correctAnswer: "K", // Phonetic learning
-    points: 10,
+    type: "drag-and-drop",
+    instruction: "Spell the animal in the image",
+    items:["O", "G", "D"],
+    correctAnswer: ["D", "O", "G"],
+    points: 5
   },
   {
     type: "drag-and-drop",
-    instruction: "Arrange the words to form a correct sentence",
-    items: ["I", "see", "a", "dog"],
-    correctAnswer: ["I", "see", "a", "dog"], // Consistent field name for checking logic
-    points: 15,
-  },
-  {
-    type: "drag-and-drop",
-    instruction: "Arrange the words to form a complete sentence",
-    items: ["The", "sun", "is", "bright"],
-    correctAnswer: ["The", "sun", "is", "bright"], // Proper sentence formation
-    points: 15,
+    instruction: "Spell the animal in the image",
+    items:["A", "C", "T"],
+    correctAnswer: ["C", "A", "T"],
+    points: 5
   },
   {
     type: "cognitive-challenge",
-    instruction: "Match the words with their pictures",
-    items: [
-      { word: "Apple", image: "🍎" },
-      { word: "Sun", image: "☀️" },
-    ],
-    correctAnswer: { "🍎": "Apple", "☀️": "Sun" }, // Easier structure for matching
-    points: 20,
+    instruction: "Expression Match",
+    items: ["Walk Away", "Tell an Adult"],
+    correctAnswer: "Tell an Adult",
+    points: 5
   },
   {
     type: "cognitive-challenge",
-    instruction: "Match the uppercase letter to its lowercase",
-    items: [
-      { upper: "A", lower: "a" },
-      { upper: "B", lower: "b" },
-    ],
-    correctAnswer: { "A": "a", "B": "b" }, // Clear direct matching
-    points: 20,
+    instruction: "Expression Match",
+    items: ["Walk Away", "Tell an Adult"],
+    correctAnswer: "Tell an Adult",
+    points: 5
   },
+  {
+    type: "quiz",
+    instruction: "What is a noun",
+    items: ["run", "elephant", "talk", "quickly"],
+    correctAnswer: "elephant",
+    points: 5
+  }, 
+  {
+    type: "quiz",
+    instruction: "What is a noun",
+    items: ["think", "beautiful", "tree", "loud"],
+    correctAnswer: "tree",
+    points: 5
+  },
+  {
+    type: "quiz",
+    instruction: "What is a noun",
+    items: ["jump", "apple", "quickly", "bright"],
+    correctAnswer: "apple",
+    points: 5
+  },
+  {
+    type: "quiz",
+    instruction: "What is a noun",
+    items: ["walking", "chair", "happy", "soft"],
+    correctAnswer: "chair",
+    points: 5
+  },
+  {
+    type: "cognitive-challenge",
+    instruction: "What is the correct punctuation mark?",
+    items: [".", ",", "!", "?"],
+    correctAnswer: "!",
+    points: 5
+  },
+  
 ];
 
 const seedDatabase = async () => {
