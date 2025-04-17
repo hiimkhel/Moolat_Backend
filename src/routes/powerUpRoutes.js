@@ -6,4 +6,4 @@ const router = express.Router();
 router.post("/use", usePowerUps);
 router.get("/", getPowerUps);
 
-module.exports = router;
+module.exports = router;    
